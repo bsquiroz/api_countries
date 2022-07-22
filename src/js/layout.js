@@ -1,4 +1,10 @@
 import { fetchContries } from "./api.js";
+import {
+    formatNumber,
+    printBorders,
+    printCurrencies,
+    printLenguages,
+} from "./helpers.js";
 
 async function printCountries(op = "all") {
     const contentCountries = document.querySelector(".content_countries");
@@ -10,11 +16,6 @@ async function printCountries(op = "all") {
         return;
     }
 
-    const currency = (number) =>
-        new Intl.NumberFormat("en-CA", {
-            style: "decimal",
-        }).format(number);
-
     let html = "";
 
     res.forEach(({ name, population, region, capital, flags }) => {
@@ -24,11 +25,9 @@ async function printCountries(op = "all") {
                     <img src="${flags.png}" alt="${name}">
                 </div>
                 <div class="country_info">
-                    <div class="country_info-title">
-                        <p class="title1">${name}</p>
-                    </div>
+                    <p class="country_info-title title1">${name}</p>
                     <div class="country_info-body">
-                        <p class="text1">Population: <span class="text2">${currency(
+                        <p class="text1">Population: <span class="text2">${formatNumber(
                             population
                         )}</span></p>
                         <p class="text1">Region: <span class="text2">${region}</span></p>
@@ -41,4 +40,66 @@ async function printCountries(op = "all") {
     contentCountries.innerHTML = html;
 }
 
-export { printCountries };
+function printCurrentCountry(res) {
+    const currentCountryContent = document.querySelector(
+        ".current_country-content"
+    );
+
+    let html = "";
+    res.forEach(
+        ({
+            name,
+            nativeName,
+            population,
+            region,
+            subRegion,
+            capital,
+            flags,
+            tld,
+            currencies,
+            languages,
+            borders,
+        }) => {
+            html += `
+            <div class="current_country-img">
+                <img src="${flags.svg}" alt="${name}">
+            </div>
+
+            <div class="current_country-info">
+                <p class="current_country-title title1">${name}</p>
+
+                <div class="section1">
+                    <p class="text1">Native name: <span class="text2">${nativeName}</span></p>
+                    <p class="text1">Population: <span class="text2">${formatNumber(
+                        population
+                    )}</span></p>
+                    <p class="text1">Region: <span class="text2">${region}</span></p>
+                    <p class="text1">Sub region: <span class="text2">${subRegion}</span></p>
+                    <p class="text1">Capital: <span class="text2">${capital}</span></p>
+                </div>
+
+                <div class="section2">
+                    <p class="text1">Top level domain: <span class="text2">${tld}</span></p>
+                    <p class="text1">Currencies: <span class="text2">${printCurrencies(
+                        currencies
+                    )}</span></p>
+                    <p class="text1">Languages: <span class="text2">${printLenguages(
+                        languages
+                    )}</span></p>
+                </div>
+
+                <div class="section3">
+                    <p class="text1">Border countries</p>
+
+                    <div class="content_labels">
+                        ${printBorders(borders)}
+                    </div>
+                </div>
+            </div>`;
+        }
+    );
+
+    currentCountryContent.innerHTML = html;
+}
+
+export { printCountries, printCurrentCountry };

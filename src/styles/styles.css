@@ -7,6 +7,10 @@
     --mode-input: hsl(0, 0%, 52%);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body.darkTheme {
     --mode-elements: hsl(209, 23%, 22%);
     --mode-bg: hsl(207, 26%, 17%);
@@ -31,9 +35,14 @@ img {
     height: 100%;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .bx {
     color: var(--mode-text);
-    transition: color 0.5s;
+    transition: color 0.5s, transform 0.5s;
 }
 
 .title1 {
@@ -73,11 +82,21 @@ img {
 .header {
     background-color: var(--mode-elements);
     height: 70px;
+    padding: 1em;
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}
+
+.header_content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1em;
-    margin-bottom: 2em;
+    height: 100%;
+}
+
+.header_title {
+    cursor: pointer;
 }
 
 .changeTheme {
@@ -88,6 +107,7 @@ img {
 }
 
 .form_search {
+    padding-top: 90px;
     display: flex;
     flex-direction: column;
     gap: 2em;
@@ -162,7 +182,12 @@ img {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
+.content_countries-none {
+    display: none;
+}
+
 .country {
+    max-width: 500px;
     background-color: var(--mode-elements);
     border-radius: 1em;
     overflow: hidden;
@@ -185,4 +210,66 @@ img {
 
 .country_info-title {
     margin-bottom: 1em;
+}
+
+.current_country {
+    background-color: var(--mode-bg);
+    padding: 2em 1em;
+    display: none;
+}
+
+.current_country-show {
+    display: block;
+}
+
+.current_country-content {
+    margin-top: 2em;
+    display: grid;
+    gap: 2em;
+}
+
+@media (min-width: 700px) {
+    .current_country-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.current_country-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.goback {
+    background-color: var(--mode-elements);
+    padding: 0.5em 1em;
+    border: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    width: 100px;
+}
+
+.goback:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.goback:hover .bx {
+    transform: translateX(-5px);
+}
+
+.content_labels {
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+.label {
+    padding: 1em;
+    background-color: var(--mode-elements);
+    color: var(--mode-text);
 }
