@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>country</title>
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./src/styles/styles.css">
+</head>
+
+<body>
+    <main class="container_principal">
+        <header class="header shadow">
+            <p class="header_title title2">Where in the world?</p>
+            <div class="changeTheme">
+                <i class='bx bxs-moon'></i>
+                <span class="text1">Dark Mode</span>
+            </div>
+        </header>
+
+        <div class="max_width_content">
+            <form class="form_search" id="search">
+                <div class="input_search shadow">
+                    <i class='bx bx-search'></i>
+                    <input type="text" placeholder="Search for a country" name="search" id="search">
+                </div>
+
+                <select class="select_country shadow" id="selectCountries"></select>
+            </form>
+
+            <div class="content_countries"></div>
+
+        </div>
+
+    </main>
+
+
+    <script src="./src/js/main.js" type="module"></script>
+
+</body>
+
+</html>
